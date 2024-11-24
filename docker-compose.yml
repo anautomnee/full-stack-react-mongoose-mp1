@@ -17,7 +17,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/mini-project1
+      - MONGO_URI=mongodb://mongo:27017/mini-project1
     depends_on:
       - mongo
     networks:

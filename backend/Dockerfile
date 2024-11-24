@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 3001
 
 # Start the Node.js app
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]
