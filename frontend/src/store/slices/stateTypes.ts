@@ -22,3 +22,8 @@ export type authenticationDataType = {
     username: string,
     password: string,
 }
+
+export type loginPayloadType = {
+    message: string,
+    data?: any,
+}

@@ -21,7 +21,9 @@ router.post("/login", async (req, res) => {
             return res.status(401).send('Wrong password or username');
         }
         const token = await jwt.sign({username: user.username}, process.env.JWT_KEY, {expiresIn: "1h"});
-        res.status(200).json('Successfully logged in with token ' + token);
+        res.status(200).json({message: 'Successfully logged in with token ', data: {
+            token, username: user.username,
+            }});
     } catch (error) {
         console.error('Error registering a user: ', error);
         res.status(500).send('Error logging in');
@@ -31,6 +33,7 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const { username, password } = req.body;
+        console.log(username, password);
         if (!username || !username) {
             return res.status(400).send('Username and password is required');
         }

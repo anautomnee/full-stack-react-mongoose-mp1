@@ -1,3 +1,5 @@
+import {Form} from "../../components/Form.tsx";
+
 export const Login = () => {
-    return (<h1>Login</h1>)
-};
+    return <Form type="login"/>
+}
