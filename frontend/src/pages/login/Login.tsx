@@ -1,5 +1,5 @@
-import {Form} from "../../components/Form.tsx";
+import {AuthForm} from "../../components/AuthForm.tsx";
 
 export const Login = () => {
-    return <Form type="login"/>
+    return <AuthForm type="login"/>
 }

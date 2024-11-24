@@ -7,11 +7,12 @@ const router = express.Router();
 
 router.get("/", authenticateToken, async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().populate("author", "username");
+        console.log(posts);
         if(!posts.length) {
             return res.status(401).send('No posts found.');
         }
-        res.status(200).send(posts);
+        res.send(posts);
     } catch (error) {
         return res.status(404).send("Error getting posts");
     }

@@ -1,7 +1,6 @@
-// authActions.js
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {authenticationDataType} from "./stateTypes.ts";
+import {authenticationDataType, createPostDataType, getPostsDataType} from "./stateTypes.ts";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -50,7 +49,6 @@ export const userLogin = createAsyncThunk(
                 config
             )
             // store user's token in local storage
-            console.log(data)
             localStorage.setItem('userToken', data.userToken)
             return data
         } catch (error: unknown) {
@@ -65,4 +63,60 @@ export const userLogin = createAsyncThunk(
             }
         }
     }
-)
+);
+
+export const getPosts = createAsyncThunk(
+    'posts/get',
+    async ({token}: getPostsDataType, {rejectWithValue}) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+            };
+
+            const {data} = await axios.get(`${backendURL}/posts/`, config);
+            return data;
+
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message)
+                } else {
+                    return rejectWithValue(error.message)
+                }
+            }
+        }
+    }
+);
+
+
+export const createPost = createAsyncThunk(
+    'posts/create',
+    async ({title, content, author, token}: createPostDataType, {rejectWithValue}) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+            };
+
+            const {data} = await axios.post(`${backendURL}/posts/`,
+                { title, content, author, token },
+                config);
+            return data;
+
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message)
+                } else {
+                    return rejectWithValue(error.message)
+                }
+            }
+        }
+    }
+);
+

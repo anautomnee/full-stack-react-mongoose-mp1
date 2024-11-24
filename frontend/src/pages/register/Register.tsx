@@ -1,5 +1,5 @@
-import {Form} from "../../components/Form.tsx";
+import {AuthForm} from "../../components/AuthForm.tsx";
 
 export const Register = () => {
-    return <Form type="register"/>
+    return <AuthForm type="register"/>
 }

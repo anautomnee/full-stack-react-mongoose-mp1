@@ -26,10 +26,6 @@ async function startServer() {
         app.use('/auth', authRouter);
         app.use('/posts', postsRouter);
 
-        app.get('/', (req, res) => {
-            res.send('Hello World!');
-        });
-
         app.listen(port, () => {
             console.log('Server is running on port http://localhost:' + port);
         });

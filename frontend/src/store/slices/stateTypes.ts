@@ -1,8 +1,9 @@
 export type Post = {
-    id: string,
+    id?: string,
     title: string,
     content: string,
-    author: string,
+    author: Author,
+    createdAt?: string,
 }
 
 export type User = {
@@ -11,11 +12,16 @@ export type User = {
     posts: Post[],
 }
 
+export type Author = {
+    _id: string,
+    username: string,
+}
+
 export type authStateType = {
     status: string,
     error: string | null,
     userToken: string | null,
-    userInfo: User | null
+    userInfo: string | null
 }
 
 export type authenticationDataType = {
@@ -26,4 +32,21 @@ export type authenticationDataType = {
 export type loginPayloadType = {
     message: string,
     data?: any,
+}
+
+export type postStateType = {
+    status: string,
+    error: string | null,
+    posts: Post[] | null,
+}
+
+export type getPostsDataType = {
+    token: string
+}
+
+export type createPostDataType = {
+    title: string,
+    content: string,
+    author: string,
+    token: string
 }

@@ -1,15 +1,19 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {registerUser, userLogin} from "../store/slices/actionCreators.ts";
-import {AppDispatch} from "../store/store.ts";
+import {AppDispatch, RootState} from "../store/store.ts";
 import {authenticationDataType} from "../store/slices/stateTypes.ts";
+import {useNavigate} from "react-router";
+import {useEffect} from "react";
 
 type FormProps = {
     type: "login" | "register";
 };
 
-export const Form = ({ type }: FormProps) => {
+export const AuthForm = ({ type }: FormProps) => {
+    const {status} = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -23,6 +27,12 @@ export const Form = ({ type }: FormProps) => {
             dispatch(registerUser(data));
         }
     };
+
+    useEffect(() => {
+        if (status === "SUCCEEDED") {
+            navigate("/");
+        }
+    }, [status, navigate]);
 
     return (
         <div className="flex items-center justify-center h-screen">

@@ -33,7 +33,6 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const { username, password } = req.body;
-        console.log(username, password);
         if (!username || !username) {
             return res.status(400).send('Username and password is required');
         }

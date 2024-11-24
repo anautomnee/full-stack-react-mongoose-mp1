@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0c60fe-e939-4799-9dd5-e1f5be530d80" name="Changes" comment="" />
+    <list default="true" id="8a0c60fe-e939-4799-9dd5-e1f5be530d80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/createPost/CreatePost.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/home/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/slices/postsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/routes/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/routes/MainRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/actionCreators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/actionCreators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/authSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/stateTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/stateTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/store.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +26,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -25,22 +43,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/anastasiakozlova/Desktop/ICH/node/projects/mini-project1/routes&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/anastasiakozlova/Desktop/ICH/node/projects/mini-project1",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/anastasiakozlova/Desktop/ICH/node/projects/mini-project1/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/routes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/store/slices" />
+      <recent name="$PROJECT_DIR$/backend" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -62,6 +86,7 @@
       <workItem from="1732105447325" duration="165000" />
       <workItem from="1732105618130" duration="5610000" />
       <workItem from="1732129265464" duration="6683000" />
+      <workItem from="1732441046291" duration="19184000" />
     </task>
     <servers />
   </component>
