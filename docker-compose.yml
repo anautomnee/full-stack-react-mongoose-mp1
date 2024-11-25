@@ -6,6 +6,8 @@ services:
       context: ./frontend  # Path to your React app
     ports:
       - "80:80"
+    env_file:
+      - ./frontend/.env
     depends_on:
       - backend
     networks:
@@ -16,8 +18,8 @@ services:
       context: ./backend  # Path to your Node.js app
     ports:
       - "3001:3001"
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/mini-project1
+    env_file:
+      - ./backend/.env
     depends_on:
       - mongo
     networks:

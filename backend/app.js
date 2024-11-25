@@ -10,23 +10,31 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173',  // Allow requests from this origin
-    methods: ['GET', 'POST'],         // Specify allowed methods
+    origin: function (origin, callback) {
+        // Разрешаем запросы с этих двух источников
+        if (origin === `http://${process.env.HOST_IP}` || origin === `http://${process.env.HOST_IP}:3001` || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },  // Use the public IP in production, localhost in development
+    methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+    preflightContinue: false,
 };
 
 async function startServer() {
 
     try {
         await connectToDb();
+        app.use(cors(corsOptions));
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
-        app.use(cors(corsOptions));
 
         app.use('/auth', authRouter);
         app.use('/posts', postsRouter);
 
-        app.listen(port, () => {
+        app.listen(port, '0.0.0.0', () => {
             console.log('Server is running on port http://localhost:' + port);
         });
 
