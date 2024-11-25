@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {registerUser, userLogin} from "../store/slices/actionCreators.ts";
 import {AppDispatch, RootState} from "../store/store.ts";
 import {authenticationDataType} from "../store/slices/stateTypes.ts";
-import {useNavigate} from "react-router";
+import {NavLink, useNavigate} from "react-router";
 import {useEffect} from "react";
 
 type FormProps = {
@@ -31,6 +31,8 @@ export const AuthForm = ({ type }: FormProps) => {
     useEffect(() => {
         if (status === "SUCCEEDED") {
             navigate("/");
+        } else if(status === "REGISTERED") {
+            navigate("/login");
         }
     }, [status, navigate]);
 
@@ -53,6 +55,8 @@ export const AuthForm = ({ type }: FormProps) => {
                         type="submit"
                         className="cursor-pointer py-2 px-4 rounded-lg bg-slate-600 text-white w-60"/>
                 </form>
+                {type === "register" && <NavLink to="/login" className="mt-5 text-slate-500 cursor-pointer hover:underline">Already have an account?</NavLink>}
+                {type === "login" && <NavLink to="/register" className="mt-5text-slate-500 cursor-pointer hover:underline">No account yet?</NavLink>}
             </div>
         </div>
     )

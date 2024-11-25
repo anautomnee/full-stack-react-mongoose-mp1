@@ -2,7 +2,14 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {authenticationDataType, createPostDataType, getPostsDataType} from "./stateTypes.ts";
 
-const backendURL = import.meta.env.VITE_BACKEND_URL;
+let backendURL;
+
+if(import.meta.env.VITE_ENV === 'local') {
+    backendURL = 'http://localhost:3001';
+} else {
+    backendURL = import.meta.env.VITE_BACKEND_URL;
+}
+console.log(backendURL);
 
 export const registerUser = createAsyncThunk(
     'auth/register',

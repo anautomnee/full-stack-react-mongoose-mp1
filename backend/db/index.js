@@ -1,8 +1,12 @@
 import mongoose from 'mongoose'
 import 'dotenv/config';
 
-const uri = process.env.MONGO_URI;
-
+let uri;
+if (process.env.ENV === 'local') {
+    uri ='mongodb://localhost:27017/mini-project1';
+} else {
+    uri = process.env.MONGO_URI ;
+}
 async function connectToDb() {
     try {
         await mongoose.connect(uri);

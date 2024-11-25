@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
+        console.log(username, password);
         if (!username || !password) {
             return res.status(400).send('Username and password is required');
         }
@@ -32,8 +33,9 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
     try {
+        console.log(req.body);
         const { username, password } = req.body;
-        if (!username || !username) {
+        if (!username || !password) {
             return res.status(400).send('Username and password is required');
         }
         // Check if user exists
@@ -43,6 +45,7 @@ router.post("/register", async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         await User.create({username: username, password: hashedPassword});
+        console.log('after query');
         res.status(200).send('Successfully registered!');
     } catch (error) {
         console.error('Error registering a user: ', error);

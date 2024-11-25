@@ -5,14 +5,21 @@ import postsRouter from './routes/posts.js';
 import connectToDb from "./db/index.js";
 import cors from "cors";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
+let hostIp;
+if (process.env.ENV === 'local') {
+    hostIp = 'localhost';
+} else {
+    hostIp = process.env.HOST_IP;
+}
+
 
 const app = express();
 
 const corsOptions = {
     origin: function (origin, callback) {
         // Разрешаем запросы с этих двух источников
-        if (origin === `http://${process.env.HOST_IP}` || origin === `http://${process.env.HOST_IP}:3001` || !origin) {
+        if (origin === `http://${hostIp}` || origin === `http://${hostIp}:3001` || origin === `http://${hostIp}:5173` || !origin) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
