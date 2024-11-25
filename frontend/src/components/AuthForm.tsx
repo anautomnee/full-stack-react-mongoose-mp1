@@ -11,7 +11,7 @@ type FormProps = {
 };
 
 export const AuthForm = ({ type }: FormProps) => {
-    const {status} = useSelector((state: RootState) => state.auth);
+    const {status, error} = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -40,6 +40,7 @@ export const AuthForm = ({ type }: FormProps) => {
         <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col items-center justify-center py-12 px-8 rounded-xl">
                 <p className="text-3xl font-bold underline">{type === "login" ? "Login" : "Register"}</p>
+                {error && <p className="text-red-600 mt-3">{error}</p>}
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center gap-5 mt-5">
                     <input placeholder={type === "login" ? "Login" : "Register"}
                            {...register("username", {required: true})}
@@ -56,7 +57,7 @@ export const AuthForm = ({ type }: FormProps) => {
                         className="cursor-pointer py-2 px-4 rounded-lg bg-slate-600 text-white w-60"/>
                 </form>
                 {type === "register" && <NavLink to="/login" className="mt-5 text-slate-500 cursor-pointer hover:underline">Already have an account?</NavLink>}
-                {type === "login" && <NavLink to="/register" className="mt-5text-slate-500 cursor-pointer hover:underline">No account yet?</NavLink>}
+                {type === "login" && <NavLink to="/register" className="mt-5 text-slate-500 cursor-pointer hover:underline">No account yet?</NavLink>}
             </div>
         </div>
     )

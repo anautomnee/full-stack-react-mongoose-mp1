@@ -8,7 +8,6 @@ const router = express.Router();
 router.get("/", authenticateToken, async (req, res) => {
     try {
         const posts = await Post.find().populate("author", "username");
-        console.log(posts);
         if(!posts.length) {
             return res.status(401).send('No posts found.');
         }
@@ -36,4 +35,24 @@ router.post("/", authenticateToken, async (req, res) => {
         return res.status(404).send("Error creating a post");
     }
 })
+
+router.delete("/:id", authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findById(id).populate("author", "username");
+        if (!post) {
+            return res.status(404).send('Post not found');
+        }
+        if(post.author.username !== req.user.username) {
+            return res.status(403).send('No access');
+        }
+        const postId = post._id;
+        await post.deleteOne();
+        res.status(200).send(postId);
+    } catch (error) {
+        console.error(error);
+        res.status(404).send('Error deleting a post');
+    }
+})
+
 export default router;

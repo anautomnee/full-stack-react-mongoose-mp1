@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {authenticationDataType, createPostDataType, getPostsDataType} from "./stateTypes.ts";
+import {authenticationDataType, createPostDataType, deletePostDataType, getPostsDataType} from "./stateTypes.ts";
 
 let backendURL;
 
@@ -127,3 +127,28 @@ export const createPost = createAsyncThunk(
     }
 );
 
+export const deletePost = createAsyncThunk(
+    'posts/delete',
+    async ({_id, token}: deletePostDataType, {rejectWithValue}) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+            };
+
+            const {data} = await axios.delete(`${backendURL}/posts/${_id}`, config);
+            return data;
+
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message)
+                } else {
+                    return rejectWithValue(error.message)
+                }
+            }
+        }
+    }
+);

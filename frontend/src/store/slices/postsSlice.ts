@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Post, postStateType} from "./stateTypes.ts";
-import {createPost, getPosts} from "./actionCreators.ts";
+import {createPost, deletePost, getPosts} from "./actionCreators.ts";
 
 const initialState: postStateType = {
     status: 'IDLE',
@@ -32,6 +32,16 @@ const postsSlice = createSlice({
         }).addCase(createPost.rejected, (state, action) => {
             state.status = "REJECTED";
             state.error = action.error.message || "Could not create a post";
+        }).addCase(deletePost.pending, (state) => {
+            state.status = "LOADING";
+            state.error = null;
+        }).addCase(deletePost.fulfilled, (state, action) => {
+            state.status = "DELETED";
+            state.error = null;
+            state.posts = state.posts?.filter(post => post._id !== action.payload) || null;
+        }).addCase(deletePost.rejected, (state, action) => {
+            state.status = "REJECTED";
+            state.error = action.error.message || "Could not delete a post";
         })
     }
 });

@@ -1,5 +1,5 @@
 export type Post = {
-    id?: string,
+    _id?: string,
     title: string,
     content: string,
     author: Author,
@@ -48,5 +48,10 @@ export type createPostDataType = {
     title: string,
     content: string,
     author: string,
+    token: string
+}
+
+export type deletePostDataType = {
+    _id: string,
     token: string
 }
