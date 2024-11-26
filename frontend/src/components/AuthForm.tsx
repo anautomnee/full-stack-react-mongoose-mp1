@@ -45,13 +45,13 @@ export const AuthForm = ({ type }: FormProps) => {
                     <input placeholder={type === "login" ? "Login" : "Register"}
                            {...register("username", {required: true})}
                            className="border py-2 px-4 rounded-lg bg-slate-100 w-60" />
-                    {errors.username && <span>This field is required</span>}
+                    {errors.username && <span>Username is required</span>}
                     <input
                         type={type === "register" ? "text" : "password"}
                         placeholder="Password"
                         {...register("password", {required: true, minLength: 6})}
                         className="border py-2 px-4 rounded-lg bg-slate-100 w-60" />
-                    {errors.password && <span>This field is required</span>}
+                    {errors.password && <span>Password must be minimum 6 characters</span>}
                     <input
                         type="submit"
                         className="cursor-pointer py-2 px-4 rounded-lg bg-slate-600 text-white w-60"/>

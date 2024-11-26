@@ -70,15 +70,15 @@ export const PostForm = ({type, _id, setEdit, title, content}: PostFormPropsType
                     {...register("title", {required: true})}
                     className="border py-2 px-4 rounded-lg bg-slate-100"
                     style={{width: '660px'}}/>
-                {errors.title && <span>This field is required</span>}
+                {errors.title && <span>Title is required</span>}
                 <textarea
                     defaultValue={content ? content : ""}
                     placeholder="Content"
-                    {...register("content", {required: true, minLength: 20})}
+                    {...register("content", {required: true, minLength: 20, maxLength: 200})}
                     className="border py-2 px-4 rounded-lg bg-slate-100 h-52"
                     style={{width: '660px'}}
                 />
-                {errors.content && <span>This field is required</span>}
+                {errors.content && <span>Content should be between 20 and 200 characters</span>}
                 <input
                     type="submit"
                     className="cursor-pointer py-2 px-4 rounded-lg bg-slate-600 text-white w-60"
