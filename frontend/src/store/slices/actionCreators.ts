@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {authenticationDataType, createPostDataType, deletePostDataType, getPostsDataType} from "./stateTypes.ts";
+import {
+    authenticationDataType,
+    createPostDataType,
+    deletePostDataType,
+    getPostsDataType,
+    updatePostDataType
+} from "./stateTypes.ts";
 
 let backendURL;
 
@@ -9,7 +15,6 @@ if(import.meta.env.VITE_ENV === 'local') {
 } else {
     backendURL = import.meta.env.VITE_BACKEND_URL;
 }
-console.log(backendURL);
 
 export const registerUser = createAsyncThunk(
     'auth/register',
@@ -139,6 +144,32 @@ export const deletePost = createAsyncThunk(
             };
 
             const {data} = await axios.delete(`${backendURL}/posts/${_id}`, config);
+            return data;
+
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message)
+                } else {
+                    return rejectWithValue(error.message)
+                }
+            }
+        }
+    }
+);
+
+export const updatePost = createAsyncThunk(
+    'posts/update',
+    async (updateData: updatePostDataType, {rejectWithValue}) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': updateData.token
+                },
+            };
+
+            const {data} = await axios.put(`${backendURL}/posts/${updateData._id}`, updateData, config);
             return data;
 
         } catch (error) {

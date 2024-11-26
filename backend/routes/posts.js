@@ -2,6 +2,7 @@ import express from "express";
 import authenticateToken from "../middleware/authMiddleware.js";
 import Post from "../db/models/post.js";
 import User from "../db/models/user.js";
+import {ObjectId} from "mongoose";
 
 const router = express.Router();
 
@@ -27,7 +28,6 @@ router.post("/", authenticateToken, async (req, res) => {
         if (!user) {
             return res.status(404).send('Author Not Found');
         }
-        console.log(user);
         await Post.create({title: title, content: content, author: user._id, createdAt: Date.now()});
         res.status(200).send('Post successfully created');
     } catch (error) {
@@ -53,6 +53,22 @@ router.delete("/:id", authenticateToken, async (req, res) => {
         console.error(error);
         res.status(404).send('Error deleting a post');
     }
-})
+});
+
+router.put("/:id", authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+        if(!updateData) {
+            return res.status(404).send('No update data received');
+        }
+        console.log(updateData);
+        await Post.updateOne({_id: id}, updateData);
+        res.status(200).send(updateData);
+    } catch (error) {
+        console.error(error);
+        res.status(404).send('Error deleting a post');
+    }
+});
 
 export default router;

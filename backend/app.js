@@ -25,7 +25,7 @@ const corsOptions = {
             callback(new Error("Not allowed by CORS"));
         }
     },  // Use the public IP in production, localhost in development
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
     preflightContinue: false,
 };

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Post, postStateType} from "./stateTypes.ts";
-import {createPost, deletePost, getPosts} from "./actionCreators.ts";
+import {Post, postStateType, updatePostDataType} from "./stateTypes.ts";
+import {createPost, deletePost, getPosts, updatePost} from "./actionCreators.ts";
 
 const initialState: postStateType = {
     status: 'IDLE',
@@ -13,6 +13,7 @@ const postsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
+        // Get posts
         builder.addCase(getPosts.pending, (state) => {
             state.status = "LOADING";
             state.error = null;
@@ -23,6 +24,8 @@ const postsSlice = createSlice({
             state.status = "REJECTED";
             state.posts = null;
             state.error = action.error.message || "Could not fetch posts";
+
+            // Create post
         }).addCase(createPost.pending, (state) => {
             state.status = "LOADING";
             state.error = null;
@@ -32,7 +35,9 @@ const postsSlice = createSlice({
         }).addCase(createPost.rejected, (state, action) => {
             state.status = "REJECTED";
             state.error = action.error.message || "Could not create a post";
-        }).addCase(deletePost.pending, (state) => {
+        })
+            // Delete post
+            .addCase(deletePost.pending, (state) => {
             state.status = "LOADING";
             state.error = null;
         }).addCase(deletePost.fulfilled, (state, action) => {
@@ -42,6 +47,27 @@ const postsSlice = createSlice({
         }).addCase(deletePost.rejected, (state, action) => {
             state.status = "REJECTED";
             state.error = action.error.message || "Could not delete a post";
+        })
+            // UpdatePost
+            .addCase(updatePost.pending, (state) => {
+            state.status = "LOADING";
+            state.error = null;
+        }).addCase(updatePost.fulfilled, (state, action: PayloadAction<updatePostDataType>) => {
+            state.status = "UPDATED";
+            state.error = null;
+            state.posts = state.posts?.map(post => {
+                if(post._id === action.payload._id) {
+                    if(action.payload.title) {
+                        post.title = action.payload.title;
+                    } else if(action.payload.content) {
+                        post.content = action.payload.content;
+                    }
+                }
+                return post;
+            }) ?? null;
+        }).addCase(updatePost.rejected, (state, action) => {
+            state.status = "REJECTED";
+            state.error = action.error.message || "Could not update a post";
         })
     }
 });

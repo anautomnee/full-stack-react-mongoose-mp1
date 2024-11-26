@@ -55,3 +55,10 @@ export type deletePostDataType = {
     _id: string,
     token: string
 }
+
+export type updatePostDataType = {
+    _id: string,
+    token: string,
+    title?: string,
+    content?: string,
+}
